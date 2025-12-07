@@ -40,33 +40,33 @@ I'm an entry-level DevOps professional building practical security skills throug
 ## Challenge Progress
 
 ### Attack Scenarios
-| # | Scenario | Skills | Status |
-|---|----------|--------|--------|
-| 1 | Sensitive Keys in Codebases | Secret detection, code review | |
-| 2 | DIND Exploitation | Docker socket abuse, container breakout | |
-| 3 | SSRF in Kubernetes | Cloud metadata, service discovery | |
-| 4 | Container Escape to Host | Privileged containers, hostPID | |
-| 7 | Attacking Private Registry | Registry enumeration, image pulling | |
-| 8 | NodePort Exposed Services | Service discovery, network exposure | |
-| 10 | Crypto Miner Analysis | Malware analysis, forensics | |
-| 11 | Namespace Bypass | Cross-namespace attacks, network policies | |
-| 12 | Environment Information | Enumeration, information disclosure | |
-| 13 | DoS Resources | Resource limits, quotas | |
-| 15 | Hidden in Layers | Docker history, layer extraction | |
-| 16 | RBAC Misconfiguration | Permission escalation, role binding | |
+| # | Scenario | Skills | Completed |
+|---|----------|--------|:---------:|
+| 1 | Sensitive Keys in Codebases | Secret detection, code review | [ ] |
+| 2 | DIND Exploitation | Docker socket abuse, container breakout | [ ] |
+| 3 | SSRF in Kubernetes | Cloud metadata, service discovery | [ ] |
+| 4 | Container Escape to Host | Privileged containers, hostPID | [ ] |
+| 7 | Attacking Private Registry | Registry enumeration, image pulling | [ ] |
+| 8 | NodePort Exposed Services | Service discovery, network exposure | [ ] |
+| 10 | Crypto Miner Analysis | Malware analysis, forensics | [ ] |
+| 11 | Namespace Bypass | Cross-namespace attacks, network policies | [ ] |
+| 12 | Environment Information | Enumeration, information disclosure | [ ] |
+| 13 | DoS Resources | Resource limits, quotas | [ ] |
+| 15 | Hidden in Layers | Docker history, layer extraction | [ ] |
+| 16 | RBAC Misconfiguration | Permission escalation, role binding | [ ] |
 
 ### Defense & Tooling Scenarios
-| # | Scenario | Tool/Technique | Status |
-|---|----------|----------------|--------|
-| 5 | Docker CIS Benchmarks | docker-bench-security | |
-| 6 | Kubernetes CIS Benchmarks | kube-bench | |
-| 14 | Hacker Container | Offensive security toolkit | |
-| 17 | KubeAudit | Cluster auditing | |
-| 18 | Falco | Runtime security monitoring | |
-| 19 | Popeye | Cluster sanitization | |
-| 20 | Network Security Policies | Network segmentation | |
-| 21 | Cilium Tetragon | eBPF security observability | |
-| 22 | Kyverno Policy Engine | Policy-as-code | |
+| # | Scenario | Tool/Technique | Completed |
+|---|----------|----------------|:---------:|
+| 5 | Docker CIS Benchmarks | docker-bench-security | [ ] |
+| 6 | Kubernetes CIS Benchmarks | kube-bench | [ ] |
+| 14 | Hacker Container | Offensive security toolkit | [ ] |
+| 17 | KubeAudit | Cluster auditing | [ ] |
+| 18 | Falco | Runtime security monitoring | [ ] |
+| 19 | Popeye | Cluster sanitization | [ ] |
+| 20 | Network Security Policies | Network segmentation | [ ] |
+| 21 | Cilium Tetragon | eBPF security observability | [ ] |
+| 22 | Kyverno Policy Engine | Policy-as-code | [ ] |
 
 ## Environment Setup
 

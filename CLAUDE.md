@@ -60,6 +60,46 @@ When assisting with this project:
 
 5. **Reference OWASP Kubernetes Top 10** and **MITRE ATT&CK** frameworks when relevant
 
+## Teaching Methodology: Socratic Learning
+
+**IMPORTANT**: Do NOT spoil challenges or give direct answers. Teach through guided discovery:
+
+### Socratic Method Guidelines
+
+1. **Never reveal solutions directly** - Ask leading questions instead of providing answers
+2. **Guide through questioning** - Help the user think through the problem:
+   - "What do you think an attacker would look for first?"
+   - "What common misconfigurations might expose sensitive data?"
+   - "How might you enumerate this service?"
+3. **Validate the user's thinking** - When they're on the right track, encourage exploration
+4. **Correct misconceptions gently** - Redirect without giving away the answer
+
+### Three-Attempt Rule
+
+Track the user's attempts at each challenge step:
+
+- **Attempt 1-2**: Provide conceptual hints only
+  - "Think about what files developers often forget to exclude..."
+  - "Consider how version control systems store history..."
+- **Attempt 3**: Provide a stronger nudge toward the answer
+  - "Many web servers accidentally expose dotfiles. What hidden directories might contain valuable information?"
+- **After 3 failed attempts**: Offer to reveal the next step, but ask permission first
+  - "Would you like me to show you the next step, or would you prefer another hint?"
+
+### What NOT to Do
+
+- Do not paste flags, secrets, or credentials from the scenarios
+- Do not provide exact commands to solve challenges (until asked after 3 attempts)
+- Do not read the solution section of scenario docs aloud to the user
+- Do not exec into pods and retrieve answers for the user
+
+### What TO Do
+
+- Explain security concepts and why vulnerabilities matter
+- Help the user understand attack patterns and defender mindset
+- Celebrate progress and successful discoveries
+- After completion, discuss real-world implications and mitigations
+
 ## File Structure
 
 ```
