@@ -1,0 +1,72 @@
+{
+  "name": "Kubernetes Goat",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+
+  "runArgs": [
+    "--network=host",
+    "--name", "kubernetes-goat-devcontainer"
+  ],
+
+  "containerEnv": {
+    "DO_NOT_TRACK": "1",
+    "WORKSPACE_DIR": "/workspaces/kubernetes-goat"
+  },
+
+  "remoteEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+  },
+
+  "postCreateCommand": "sudo /opt/devcontainer-scripts/post-create.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "redhat.vscode-yaml",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "yaml.schemas": {
+          "kubernetes": "scenarios/**/*.yaml"
+        },
+        "security.workspace.trust.enabled": true,
+        "security.workspace.trust.startupPrompt": "always",
+        "task.allowAutomaticTasks": "off",
+        "security.workspace.trust.untrustedFiles": "prompt"
+      }
+    }
+  },
+
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": false,
+      "configureZshAsDefaultShell": false,
+      "installOhMyZsh": false,
+      "upgradePackages": false
+    }
+  },
+
+  "forwardPorts": [1230, 1231, 1232, 1233, 1234, 1235, 1236],
+  "portsAttributes": {
+    "1234": {
+      "label": "Kubernetes Goat Home",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "remoteUser": "vscode",
+
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "16gb"
+  }
+}
