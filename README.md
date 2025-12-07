@@ -107,10 +107,6 @@ This learning aligns with industry security frameworks:
 - [OWASP Kubernetes Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Kubernetes_Security_Cheat_Sheet.html)
 - [Kubernetes Security Best Practices](https://kubernetes.io/docs/concepts/security/)
 
-## Connect
-
-Building DevOps skills with a security-first mindset. Open to opportunities in DevOps, Platform Engineering, and Cloud Security roles.
-
 ---
 
 *This is a learning environment with intentionally vulnerable configurations. Never deploy these patterns in production.*
