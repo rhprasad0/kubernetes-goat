@@ -42,7 +42,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 ### Attack Scenarios
 | # | Scenario | Skills | Completed |
 |---|----------|--------|:---------:|
-| 1 | Sensitive Keys in Codebases | Secret detection, code review | [ ] |
+| 1 | Sensitive Keys in Codebases | Secret detection, code review | [x] |
 | 2 | DIND Exploitation | Docker socket abuse, container breakout | [ ] |
 | 3 | SSRF in Kubernetes | Cloud metadata, service discovery | [ ] |
 | 4 | Container Escape to Host | Privileged containers, hostPID | [ ] |
@@ -83,14 +83,12 @@ bash access-kubernetes-goat.sh
 
 ## Key Learnings
 
-*This section will be updated as I complete each scenario with specific takeaways and real-world implications.*
-
-### Example Entry Format:
-> **Scenario X: [Name]**
-> - **Attack Vector**: Brief description of the vulnerability
-> - **Real-World Risk**: How this applies to production environments
-> - **Mitigation**: Defensive measures to prevent this attack
-> - **Tools Used**: Security tools employed in detection/exploitation
+### Scenario 1: Sensitive Keys in Codebases
+> - **Attack Vector**: Exposed `.git` directory allows reconstruction of repository history, revealing secrets committed in earlier versions
+> - **Real-World Risk**: AWS credentials, API keys, and database passwords exposed this way have led to major breaches (Uber 2016, numerous startups)
+> - **Mitigation**: Block `.git` at web server, use pre-commit hooks for secret detection, rotate credentials immediately if exposed
+> - **Tools Used**: curl, git internals analysis, zlib decompression
+> - **Writeup**: [writeups/01-sensitive-keys-in-codebases.md](writeups/01-sensitive-keys-in-codebases.md)
 
 ## Relevant Frameworks
 
