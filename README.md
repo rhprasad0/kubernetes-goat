@@ -43,7 +43,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | # | Scenario | Skills | Completed |
 |---|----------|--------|:---------:|
 | 1 | Sensitive Keys in Codebases | Secret detection, code review | [x] |
-| 2 | DIND Exploitation | Docker socket abuse, container breakout | [ ] |
+| 2 | DIND Exploitation | Docker socket abuse, container breakout | [x] |
 | 3 | SSRF in Kubernetes | Cloud metadata, service discovery | [ ] |
 | 4 | Container Escape to Host | Privileged containers, hostPID | [ ] |
 | 7 | Attacking Private Registry | Registry enumeration, image pulling | [ ] |
@@ -89,6 +89,14 @@ bash access-kubernetes-goat.sh
 > - **Mitigation**: Block `.git` at web server, use pre-commit hooks for secret detection, rotate credentials immediately if exposed
 > - **Tools Used**: curl, git internals analysis, zlib decompression
 > - **Writeup**: [writeups/01-sensitive-keys-in-codebases.md](writeups/01-sensitive-keys-in-codebases.md)
+
+### Scenario 2: DIND (Docker-in-Docker) Exploitation
+> - **Attack Vector**: Command injection in web app + exposed containerd socket enables full container escape
+> - **Real-World Risk**: CI/CD pipelines often mount container runtime sockets for image builds; compromise leads to cluster-wide access
+> - **Mitigation**: Use rootless build tools (Kaniko, Buildah), never mount runtime sockets, validate all user input, enforce Pod Security Standards
+> - **Tools Used**: curl, crictl, command injection techniques
+> - **MITRE ATT&CK**: T1059.004 (Unix Shell), T1611 (Escape to Host)
+> - **Writeup**: [writeups/02-dind-exploitation.md](writeups/02-dind-exploitation.md)
 
 ## Relevant Frameworks
 
