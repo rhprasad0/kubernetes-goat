@@ -44,8 +44,8 @@ I'm an entry-level DevOps professional building practical security skills throug
 |---|----------|--------|:---------:|
 | 1 | Sensitive Keys in Codebases | Secret detection, code review | [x] |
 | 2 | DIND Exploitation | Docker socket abuse, container breakout | [x] |
-| 3 | SSRF in Kubernetes | Cloud metadata, service discovery | [ ] |
-| 4 | Container Escape to Host | Privileged containers, hostPID | [ ] |
+| 3 | SSRF in Kubernetes | Cloud metadata, service discovery | [~] |
+| 4 | Container Escape to Host | Privileged containers, hostPID | [x] |
 | 7 | Attacking Private Registry | Registry enumeration, image pulling | [ ] |
 | 8 | NodePort Exposed Services | Service discovery, network exposure | [ ] |
 | 10 | Crypto Miner Analysis | Malware analysis, forensics | [ ] |
