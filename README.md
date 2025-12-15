@@ -61,7 +61,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | # | Scenario | Tool/Technique | Completed |
 |---|----------|----------------|:---------:|
 | 5 | Docker CIS Benchmarks | docker-bench-security | [~] |
-| 6 | Kubernetes CIS Benchmarks | kube-bench | [ ] |
+| 6 | Kubernetes CIS Benchmarks | kube-bench | [x] |
 | 14 | Hacker Container | Offensive security toolkit | [ ] |
 | 17 | KubeAudit | Cluster auditing | [ ] |
 | 18 | Falco | Runtime security monitoring | [ ] |
