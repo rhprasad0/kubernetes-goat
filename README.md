@@ -39,6 +39,8 @@ I'm an entry-level DevOps professional building practical security skills throug
 
 ## Challenge Progress
 
+**Legend:** [x] Completed | [~] Partially complete / environment limitation | [ ] Not started
+
 ### Attack Scenarios
 | # | Scenario | Skills | Completed |
 |---|----------|--------|:---------:|
@@ -58,7 +60,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 ### Defense & Tooling Scenarios
 | # | Scenario | Tool/Technique | Completed |
 |---|----------|----------------|:---------:|
-| 5 | Docker CIS Benchmarks | docker-bench-security | [ ] |
+| 5 | Docker CIS Benchmarks | docker-bench-security | [~] |
 | 6 | Kubernetes CIS Benchmarks | kube-bench | [ ] |
 | 14 | Hacker Container | Offensive security toolkit | [ ] |
 | 17 | KubeAudit | Cluster auditing | [ ] |
