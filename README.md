@@ -48,7 +48,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 2 | DIND Exploitation | Docker socket abuse, container breakout | [x] |
 | 3 | SSRF in Kubernetes | Cloud metadata, service discovery | [~] |
 | 4 | Container Escape to Host | Privileged containers, hostPID | [x] |
-| 7 | Attacking Private Registry | Registry enumeration, image pulling | [ ] |
+| 7 | Attacking Private Registry | Registry enumeration, image pulling | [x] |
 | 8 | NodePort Exposed Services | Service discovery, network exposure | [ ] |
 | 10 | Crypto Miner Analysis | Malware analysis, forensics | [ ] |
 | 11 | Namespace Bypass | Cross-namespace attacks, network policies | [ ] |
@@ -99,6 +99,14 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: curl, crictl, command injection techniques
 > - **MITRE ATT&CK**: T1059.004 (Unix Shell), T1611 (Escape to Host)
 > - **Writeup**: [writeups/02-dind-exploitation.md](writeups/02-dind-exploitation.md)
+
+### Scenario 7: Attacking Private Registry
+> - **Attack Vector**: Unauthenticated Docker Registry API exposed internal container images; secrets leaked via ENV directives in Dockerfile history
+> - **Real-World Risk**: Private registries often contain proprietary code, embedded credentials, and internal architecture details; anonymous access enables full reconnaissance
+> - **Mitigation**: Enable registry authentication, use runtime secrets instead of ENV in Dockerfiles, implement network segmentation, use multi-stage builds to prevent secret leakage
+> - **Tools Used**: curl, crane (Google container registry CLI), jq
+> - **MITRE ATT&CK**: T1613 (Container Discovery), T1552.001 (Unsecured Credentials)
+> - **Writeup**: [writeups/07-attacking-private-registry.md](writeups/07-attacking-private-registry.md)
 
 ## Relevant Frameworks
 
