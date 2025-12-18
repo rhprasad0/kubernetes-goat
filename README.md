@@ -21,6 +21,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 - Kubernetes API enumeration and exploitation
 - SSRF attacks against cloud metadata services
 - Docker image layer analysis for secret extraction
+- Container image forensics and crypto miner detection
 - RBAC misconfiguration exploitation
 - Namespace boundary bypass attacks
 - Network reconnaissance and service discovery (nmap)
@@ -51,7 +52,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 4 | Container Escape to Host | Privileged containers, hostPID | [x] |
 | 7 | Attacking Private Registry | Registry enumeration, image pulling | [x] |
 | 8 | NodePort Exposed Services | Service discovery, network exposure | [x] |
-| 10 | Crypto Miner Analysis | Malware analysis, forensics | [ ] |
+| 10 | Crypto Miner Analysis | Malware analysis, forensics | [x] |
 | 11 | Namespace Bypass | Cross-namespace attacks, network policies | [ ] |
 | 12 | Environment Information | Enumeration, information disclosure | [ ] |
 | 13 | DoS Resources | Resource limits, quotas | [ ] |
@@ -116,6 +117,14 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: nmap (host discovery, port scanning, service fingerprinting), curl
 > - **MITRE ATT&CK**: T1046 (Network Service Discovery), T1018 (Remote System Discovery)
 > - **Writeup**: [writeups/08-nodeport-exposed-services.md](writeups/08-nodeport-exposed-services.md)
+
+### Scenario 10: Analyzing Crypto Miner Container
+> - **Attack Vector**: Malicious container image from public registry; crypto miner hidden in Dockerfile build layers and git history embedded in image
+> - **Real-World Risk**: Attackers upload innocent-looking images to Docker Hub with hidden miners; organizations unknowingly run these, paying for compute while attackers profit from mining
+> - **Mitigation**: Inspect image history before pulling (`docker history --no-trunc` or `crane config`), use image allowlisting policies, implement runtime detection (Falco), monitor for unexpected CPU usage
+> - **Tools Used**: crane (container registry CLI), git forensics, strings, kubectl
+> - **MITRE ATT&CK**: T1496 (Resource Hijacking), T1195.002 (Supply Chain Compromise), T1552.001 (Unsecured Credentials)
+> - **Writeup**: [writeups/10-analyzing-crypto-miner.md](writeups/10-analyzing-crypto-miner.md)
 
 ## Relevant Frameworks
 
