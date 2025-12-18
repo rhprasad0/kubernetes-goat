@@ -23,6 +23,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 - Docker image layer analysis for secret extraction
 - RBAC misconfiguration exploitation
 - Namespace boundary bypass attacks
+- Network reconnaissance and service discovery (nmap)
 
 ### Defensive Security (Blue Team)
 - CIS Benchmark compliance scanning (Docker & Kubernetes)
@@ -49,7 +50,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 3 | SSRF in Kubernetes | Cloud metadata, service discovery | [~] |
 | 4 | Container Escape to Host | Privileged containers, hostPID | [x] |
 | 7 | Attacking Private Registry | Registry enumeration, image pulling | [x] |
-| 8 | NodePort Exposed Services | Service discovery, network exposure | [ ] |
+| 8 | NodePort Exposed Services | Service discovery, network exposure | [x] |
 | 10 | Crypto Miner Analysis | Malware analysis, forensics | [ ] |
 | 11 | Namespace Bypass | Cross-namespace attacks, network policies | [ ] |
 | 12 | Environment Information | Enumeration, information disclosure | [ ] |
@@ -107,6 +108,14 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: curl, crane (Google container registry CLI), jq
 > - **MITRE ATT&CK**: T1613 (Container Discovery), T1552.001 (Unsecured Credentials)
 > - **Writeup**: [writeups/07-attacking-private-registry.md](writeups/07-attacking-private-registry.md)
+
+### Scenario 8: NodePort Exposed Services
+> - **Attack Vector**: External network reconnaissance (nmap) discovered Kubernetes NodePort service exposing internal application; no credentials required
+> - **Real-World Risk**: NodePort services are accessible on all cluster nodes; without network policies or firewalls, internal services become publicly reachable, enabling reconnaissance and direct attacks
+> - **Mitigation**: Use ClusterIP + Ingress instead of NodePort, implement Network Policies, configure cloud firewalls to block NodePort range (30000-32767), use private clusters
+> - **Tools Used**: nmap (host discovery, port scanning, service fingerprinting), curl
+> - **MITRE ATT&CK**: T1046 (Network Service Discovery), T1018 (Remote System Discovery)
+> - **Writeup**: [writeups/08-nodeport-exposed-services.md](writeups/08-nodeport-exposed-services.md)
 
 ## Relevant Frameworks
 

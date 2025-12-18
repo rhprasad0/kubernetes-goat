@@ -27,10 +27,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     # JSON processing
     jq \
-    # Network tools (for debugging)
+    # Network tools (for debugging and security scanning)
     dnsutils \
     netcat-openbsd \
     iputils-ping \
+    nmap \
     # Editors
     vim \
     nano \
