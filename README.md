@@ -55,7 +55,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 10 | Crypto Miner Analysis | Malware analysis, forensics | [x] |
 | 11 | Namespace Bypass | Cross-namespace attacks, network policies | [x] |
 | 12 | Environment Information | Enumeration, information disclosure | [x] |
-| 13 | DoS Resources | Resource limits, quotas | [ ] |
+| 13 | DoS Resources | Resource limits, quotas | [x] |
 | 15 | Hidden in Layers | Docker history, layer extraction | [ ] |
 | 16 | RBAC Misconfiguration | Permission escalation, role binding | [ ] |
 
@@ -141,6 +141,14 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: printenv, cat, curl, JWT decoding
 > - **MITRE ATT&CK**: T1613 (Container Discovery), T1552.001 (Unsecured Credentials), T1082 (System Information Discovery)
 > - **Writeup**: [writeups/12-environment-information.md](writeups/12-environment-information.md)
+
+### Scenario 13: DoS the Memory/CPU Resources
+> - **Attack Vector**: Kubernetes containers without resource limits can consume unlimited node resources; cgroups show `max` indicating no restrictions; stress-ng tool enables targeted resource exhaustion attacks
+> - **Real-World Risk**: 65% of Kubernetes deployments lack resource limits; a single compromised or misbehaving pod can starve critical workloads, trigger OOM killer, and cause cascading node failures across the cluster
+> - **Mitigation**: Always set resource requests and limits, implement LimitRanges for namespace defaults, enforce ResourceQuotas for namespace caps, use Kyverno/OPA policies to require limits on all pods
+> - **Tools Used**: stress-ng, cgroups filesystem inspection, kubectl
+> - **MITRE ATT&CK**: T1496 (Resource Hijacking), T1499 (Endpoint Denial of Service), T1499.002 (Service Exhaustion Flood)
+> - **Writeup**: [writeups/13-dos-resources.md](writeups/13-dos-resources.md)
 
 ## Relevant Frameworks
 
