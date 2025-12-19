@@ -53,7 +53,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 7 | Attacking Private Registry | Registry enumeration, image pulling | [x] |
 | 8 | NodePort Exposed Services | Service discovery, network exposure | [x] |
 | 10 | Crypto Miner Analysis | Malware analysis, forensics | [x] |
-| 11 | Namespace Bypass | Cross-namespace attacks, network policies | [ ] |
+| 11 | Namespace Bypass | Cross-namespace attacks, network policies | [x] |
 | 12 | Environment Information | Enumeration, information disclosure | [ ] |
 | 13 | DoS Resources | Resource limits, quotas | [ ] |
 | 15 | Hidden in Layers | Docker history, layer extraction | [ ] |
@@ -125,6 +125,14 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: crane (container registry CLI), git forensics, strings, kubectl
 > - **MITRE ATT&CK**: T1496 (Resource Hijacking), T1195.002 (Supply Chain Compromise), T1552.001 (Unsecured Credentials)
 > - **Writeup**: [writeups/10-analyzing-crypto-miner.md](writeups/10-analyzing-crypto-miner.md)
+
+### Scenario 11: Kubernetes Namespace Bypass
+> - **Attack Vector**: Kubernetes namespaces provide logical separation but no network isolation by default; any pod can communicate with services in any namespace via predictable DNS names
+> - **Real-World Risk**: Organizations often deploy databases, caches, and internal APIs in "secure" namespaces assuming isolation; attackers who compromise any pod can pivot across the entire cluster
+> - **Mitigation**: Implement Network Policies with default-deny ingress, use CNIs that support network policies (Calico, Cilium), deploy service mesh for mTLS and authorization
+> - **Tools Used**: kubectl, redis-cli, nslookup, network reconnaissance
+> - **MITRE ATT&CK**: T1021 (Remote Services), T1046 (Network Service Discovery), T1213 (Data from Information Repositories)
+> - **Writeup**: [writeups/11-namespace-bypass.md](writeups/11-namespace-bypass.md)
 
 ## Relevant Frameworks
 
