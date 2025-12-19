@@ -54,7 +54,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 8 | NodePort Exposed Services | Service discovery, network exposure | [x] |
 | 10 | Crypto Miner Analysis | Malware analysis, forensics | [x] |
 | 11 | Namespace Bypass | Cross-namespace attacks, network policies | [x] |
-| 12 | Environment Information | Enumeration, information disclosure | [ ] |
+| 12 | Environment Information | Enumeration, information disclosure | [x] |
 | 13 | DoS Resources | Resource limits, quotas | [ ] |
 | 15 | Hidden in Layers | Docker history, layer extraction | [ ] |
 | 16 | RBAC Misconfiguration | Permission escalation, role binding | [ ] |
@@ -133,6 +133,14 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: kubectl, redis-cli, nslookup, network reconnaissance
 > - **MITRE ATT&CK**: T1021 (Remote Services), T1046 (Network Service Discovery), T1213 (Data from Information Repositories)
 > - **Writeup**: [writeups/11-namespace-bypass.md](writeups/11-namespace-bypass.md)
+
+### Scenario 12: Gaining Environment Information
+> - **Attack Vector**: Kubernetes automatically injects environment variables, service account tokens, and service discovery information into every pod; secrets stored as environment variables are trivially accessible via `printenv`
+> - **Real-World Risk**: 50% of container breaches involve exposed credentials; environment variables are the #1 secret exposure vector; attackers can enumerate the entire cluster topology from a single compromised pod
+> - **Mitigation**: Never store secrets in environment variables, mount secrets as files with restrictive permissions, use external secret managers (Vault, AWS Secrets Manager), disable service account token automount when not needed
+> - **Tools Used**: printenv, cat, curl, JWT decoding
+> - **MITRE ATT&CK**: T1613 (Container Discovery), T1552.001 (Unsecured Credentials), T1082 (System Information Discovery)
+> - **Writeup**: [writeups/12-environment-information.md](writeups/12-environment-information.md)
 
 ## Relevant Frameworks
 
