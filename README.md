@@ -65,7 +65,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 5 | Docker CIS Benchmarks | docker-bench-security | [~] |
 | 6 | Kubernetes CIS Benchmarks | kube-bench | [x] |
 | 14 | Hacker Container | Offensive security toolkit | [x] |
-| 17 | KubeAudit | Cluster auditing | [ ] |
+| 17 | KubeAudit | Cluster auditing | [x] |
 | 18 | Falco | Runtime security monitoring | [ ] |
 | 19 | Popeye | Cluster sanitization | [ ] |
 | 20 | Network Security Policies | Network segmentation | [ ] |
@@ -166,6 +166,14 @@ bash access-kubernetes-goat.sh
 > - **MITRE ATT&CK**: T1078.004 (Valid Accounts: Cloud Accounts), T1552 (Unsecured Credentials), T1087 (Account Discovery)
 > - **OWASP K8s Top 10**: K01 (Insecure Workload Configurations), K08 (Secrets Management)
 > - **Writeup**: [writeups/16-rbac-misconfiguration.md](writeups/16-rbac-misconfiguration.md)
+
+### Scenario 17: KubeAudit - Audit Kubernetes Clusters
+> - **Tool Purpose**: Proactive security auditing to detect misconfigurations before attackers exploit them; shifts from offensive exploitation to defensive hardening
+> - **Key Findings**: 194+ issues including 4 privileged containers, 3 hostPID violations, 5 sensitive path mounts, 7 namespaces without network policies, 19 containers running as root
+> - **Real-World Value**: Security auditing is essential for compliance (SOC2, PCI-DSS, HIPAA) and risk management; kubeaudit can be integrated into CI/CD pipelines to prevent vulnerable deployments
+> - **Audit Correlation**: Findings directly mapped to previous exploits - PrivilegedTrue (Scenario 4), SensitivePathsMounted (Scenario 2), MissingNetworkPolicy (Scenario 11), AutomountServiceAccountToken (Scenario 16)
+> - **Tools Used**: kubeaudit, madhuakula/hacker-container, Kubernetes MCP
+> - **Writeup**: [writeups/17-kubeaudit.md](writeups/17-kubeaudit.md)
 
 ## Relevant Frameworks
 
