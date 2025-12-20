@@ -56,7 +56,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 11 | Namespace Bypass | Cross-namespace attacks, network policies | [x] |
 | 12 | Environment Information | Enumeration, information disclosure | [x] |
 | 13 | DoS Resources | Resource limits, quotas | [x] |
-| 15 | Hidden in Layers | Docker history, layer extraction | [ ] |
+| 15 | Hidden in Layers | Docker history, layer extraction | [x] |
 | 16 | RBAC Misconfiguration | Permission escalation, role binding | [ ] |
 
 ### Defense & Tooling Scenarios
@@ -64,7 +64,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 |---|----------|----------------|:---------:|
 | 5 | Docker CIS Benchmarks | docker-bench-security | [~] |
 | 6 | Kubernetes CIS Benchmarks | kube-bench | [x] |
-| 14 | Hacker Container | Offensive security toolkit | [ ] |
+| 14 | Hacker Container | Offensive security toolkit | [x] |
 | 17 | KubeAudit | Cluster auditing | [ ] |
 | 18 | Falco | Runtime security monitoring | [ ] |
 | 19 | Popeye | Cluster sanitization | [ ] |
@@ -149,6 +149,14 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: stress-ng, cgroups filesystem inspection, kubectl
 > - **MITRE ATT&CK**: T1496 (Resource Hijacking), T1499 (Endpoint Denial of Service), T1499.002 (Service Exhaustion Flood)
 > - **Writeup**: [writeups/13-dos-resources.md](writeups/13-dos-resources.md)
+
+### Scenario 15: Hidden in Layers
+> - **Attack Vector**: Docker image layers are immutable; files "deleted" with `rm` in later layers remain fully recoverable from earlier layers; secrets embedded during build persist in image history
+> - **Real-World Risk**: Developers commonly add API keys, credentials, or config files during image builds, then delete them thinking they're gone; anyone with pull access can extract all layers and recover these "deleted" secrets
+> - **Mitigation**: Use multi-stage builds to isolate build-time secrets, use `docker build --secret` for build-time credentials, scan images with tools like `dive` before publishing, never commit secrets to image layers
+> - **Tools Used**: crane (config, manifest, blob), tar, jq
+> - **MITRE ATT&CK**: T1552.001 (Unsecured Credentials in Files), T1588.001 (Obtain Capabilities: Malware)
+> - **Writeup**: [writeups/15-hidden-in-layers.md](writeups/15-hidden-in-layers.md)
 
 ## Relevant Frameworks
 
