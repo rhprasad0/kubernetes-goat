@@ -57,7 +57,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 12 | Environment Information | Enumeration, information disclosure | [x] |
 | 13 | DoS Resources | Resource limits, quotas | [x] |
 | 15 | Hidden in Layers | Docker history, layer extraction | [x] |
-| 16 | RBAC Misconfiguration | Permission escalation, role binding | [ ] |
+| 16 | RBAC Misconfiguration | Permission escalation, role binding | [x] |
 
 ### Defense & Tooling Scenarios
 | # | Scenario | Tool/Technique | Completed |
@@ -157,6 +157,15 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: crane (config, manifest, blob), tar, jq
 > - **MITRE ATT&CK**: T1552.001 (Unsecured Credentials in Files), T1588.001 (Obtain Capabilities: Malware)
 > - **Writeup**: [writeups/15-hidden-in-layers.md](writeups/15-hidden-in-layers.md)
+
+### Scenario 16: RBAC Misconfiguration
+> - **Attack Vector**: Overly permissive RBAC Role using wildcard resources (`*`) instead of specific resource types; ServiceAccount token mounted in pod allows API queries; `SelfSubjectRulesReview` API reveals excessive permissions enabling secret extraction
+> - **Real-World Risk**: RBAC misconfigurations are among the most common Kubernetes security issues; developers often use wildcards for convenience, inadvertently granting access to secrets, pods, and other sensitive resources; any compromised pod becomes a pivot point for cluster-wide reconnaissance
+> - **Mitigation**: Apply principle of least privilege - scope roles to specific resources and verbs; use `automountServiceAccountToken: false` when API access not needed; create dedicated ServiceAccounts per workload; regularly audit RBAC with `kubectl auth can-i --list`; enforce policies with Kyverno/OPA to block wildcard permissions
+> - **Tools Used**: curl (Kubernetes API), Kubernetes MCP, base64 decoding
+> - **MITRE ATT&CK**: T1078.004 (Valid Accounts: Cloud Accounts), T1552 (Unsecured Credentials), T1087 (Account Discovery)
+> - **OWASP K8s Top 10**: K01 (Insecure Workload Configurations), K08 (Secrets Management)
+> - **Writeup**: [writeups/16-rbac-misconfiguration.md](writeups/16-rbac-misconfiguration.md)
 
 ## Relevant Frameworks
 
