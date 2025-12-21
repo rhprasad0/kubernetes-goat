@@ -66,7 +66,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 6 | Kubernetes CIS Benchmarks | kube-bench | [x] |
 | 14 | Hacker Container | Offensive security toolkit | [x] |
 | 17 | KubeAudit | Cluster auditing | [x] |
-| 18 | Falco | Runtime security monitoring | [ ] |
+| 18 | Falco | Runtime security monitoring | [x] |
 | 19 | Popeye | Cluster sanitization | [ ] |
 | 20 | Network Security Policies | Network segmentation | [ ] |
 | 21 | Cilium Tetragon | eBPF security observability | [ ] |
@@ -174,6 +174,16 @@ bash access-kubernetes-goat.sh
 > - **Audit Correlation**: Findings directly mapped to previous exploits - PrivilegedTrue (Scenario 4), SensitivePathsMounted (Scenario 2), MissingNetworkPolicy (Scenario 11), AutomountServiceAccountToken (Scenario 16)
 > - **Tools Used**: kubeaudit, madhuakula/hacker-container, Kubernetes MCP
 > - **Writeup**: [writeups/17-kubeaudit.md](writeups/17-kubeaudit.md)
+
+### Scenario 18: Falco - Runtime Security Monitoring
+> - **Tool Purpose**: Detect active attacks in real-time by monitoring system calls via eBPF; catches shell spawns, sensitive file access, and container escapes as they happen
+> - **Deception Engineering**: Deployed honeypot **canary tokens** as tripwires - fake AWS credentials (`/root/.aws/credentials`), kubeconfig (`/root/.kube/config`), and an irresistible `passwords.xlsx` in `/tmp/` - placed in system-monitor and health-check pods to catch credential harvesting
+> - **AI Red Team**: Unleashed **PentestGPT** (autonomous AI attack agent) against the cluster to generate realistic attack traffic and validate detection capabilities
+> - **Detection Results**: Falco caught all suspicious activity (recursive grep searching for flags, /etc/shadow reads); canary tokens failed to alert because the attacker container blocked egress
+> - **Key Finding**: Canary tokens require network egress to "phone home" - Falco works locally at kernel level with no network dependency; defense-in-depth requires multiple detection mechanisms with different failure modes
+> - **Tools Used**: Falco (Helm), canarytokens.org, PentestGPT (AI red team)
+> - **MITRE ATT&CK**: T1003 (Credential Dumping), T1611 (Escape to Host), T1059 (Command & Scripting)
+> - **Writeup**: [writeups/18-falco-runtime-security.md](writeups/18-falco-runtime-security.md)
 
 ## Relevant Frameworks
 
