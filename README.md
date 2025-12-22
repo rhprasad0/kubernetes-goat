@@ -29,6 +29,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 ### Defensive Security (Blue Team)
 - CIS Benchmark compliance scanning (Docker & Kubernetes)
 - Runtime threat detection with Falco
+- Live cluster sanitization with Popeye (configuration drift detection)
 - Network segmentation using Network Security Policies
 - eBPF-based observability with Cilium Tetragon
 - Policy enforcement with Kyverno and OPA
@@ -67,7 +68,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 14 | Hacker Container | Offensive security toolkit | [x] |
 | 17 | KubeAudit | Cluster auditing | [x] |
 | 18 | Falco | Runtime security monitoring | [x] |
-| 19 | Popeye | Cluster sanitization | [ ] |
+| 19 | Popeye | Cluster sanitization | [x] |
 | 20 | Network Security Policies | Network segmentation | [ ] |
 | 21 | Cilium Tetragon | eBPF security observability | [ ] |
 | 22 | Kyverno Policy Engine | Policy-as-code | [ ] |
@@ -184,6 +185,15 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: Falco (Helm), canarytokens.org, PentestGPT (AI red team)
 > - **MITRE ATT&CK**: T1003 (Credential Dumping), T1611 (Escape to Host), T1059 (Command & Scripting)
 > - **Writeup**: [writeups/18-falco-runtime-security.md](writeups/18-falco-runtime-security.md)
+
+### Scenario 19: Popeye - Kubernetes Cluster Sanitizer
+> - **Tool Purpose**: Live cluster sanitization that scans running resources (not static manifests) to detect configuration drift, orphaned resources, and security misconfigurations that static analysis misses
+> - **Cluster Score**: 80/100 (Grade B) - Pods scored 0/100 with 25 errors; Deployments scored 9/100 with 8 errors; Services scored 16/100 with 10 warnings
+> - **Critical Findings**: Every vulnerability we previously exploited was flagged - containers running as root (POP-302), no network policies (POP-1204), untagged images (POP-100), missing resource limits (POP-106), default ServiceAccount usage (POP-300)
+> - **Key Insight**: Popeye scores **security hygiene**, not attack surface size - all namespaces scored identically (80/B) despite `default` having 24x more pods than `big-monolith` or `secure-middleware`; combine with resource inventory for complete risk picture
+> - **CI/CD Integration**: Can fail pipelines when cluster score drops below threshold; catches configuration drift that GitOps misses
+> - **Tools Used**: Popeye 0.21.3, madhuakula/hacker-container, Kubernetes MCP
+> - **Writeup**: [writeups/19-popeye-cluster-sanitizer.md](writeups/19-popeye-cluster-sanitizer.md)
 
 ## Relevant Frameworks
 
