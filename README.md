@@ -69,7 +69,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 17 | KubeAudit | Cluster auditing | [x] |
 | 18 | Falco | Runtime security monitoring | [x] |
 | 19 | Popeye | Cluster sanitization | [x] |
-| 20 | Network Security Policies | Network segmentation | [ ] |
+| 20 | Network Security Policies | Network segmentation | [x] |
 | 21 | Cilium Tetragon | eBPF security observability | [ ] |
 | 22 | Kyverno Policy Engine | Policy-as-code | [ ] |
 
@@ -194,6 +194,17 @@ bash access-kubernetes-goat.sh
 > - **CI/CD Integration**: Can fail pipelines when cluster score drops below threshold; catches configuration drift that GitOps misses
 > - **Tools Used**: Popeye 0.21.3, madhuakula/hacker-container, Kubernetes MCP
 > - **Writeup**: [writeups/19-popeye-cluster-sanitizer.md](writeups/19-popeye-cluster-sanitizer.md)
+
+### Scenario 20: Network Security Policies
+> - **Tool Purpose**: Implement micro-segmentation using Kubernetes Network Policies to control pod-to-pod communication and prevent lateral movement after initial compromise
+> - **Critical Discovery**: Network Policies require CNI support - Kind's default `kindnet` and EKS's `VPC CNI` do NOT enforce policies; installed **Calico** to enable enforcement
+> - **Policy Implementation**: Created ingress policy for Redis (`cache-store`) allowing only `internal-proxy` pods from `default` namespace on port 6379; all other traffic blocked
+> - **Verification Results**: `build-code` pod (unauthorized) - connection timed out; `internal-proxy` pod (authorized) - connection open; policy enforcement confirmed
+> - **EKS Insight**: Use Security Groups for node-level traffic + Network Policies for pod-level micro-segmentation; defense in depth since Security Groups can't see inside nodes
+> - **Key Lesson**: Always verify CNI supports Network Policies AND test enforcement; Kubernetes API accepts policies regardless of CNI capability (silent failure mode)
+> - **Tools Used**: Calico CNI, kubectl, netcat, Kubernetes MCP
+> - **MITRE ATT&CK**: T1021 (Lateral Movement), T1046 (Network Service Discovery)
+> - **Writeup**: [writeups/20-network-security-policies.md](writeups/20-network-security-policies.md)
 
 ## Relevant Frameworks
 
