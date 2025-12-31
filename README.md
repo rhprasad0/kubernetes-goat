@@ -70,7 +70,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 18 | Falco | Runtime security monitoring | [x] |
 | 19 | Popeye | Cluster sanitization | [x] |
 | 20 | Network Security Policies | Network segmentation | [x] |
-| 21 | Cilium Tetragon | eBPF security observability | [ ] |
+| 21 | Cilium Tetragon | eBPF security observability | [x] |
 | 22 | Kyverno Policy Engine | Policy-as-code | [ ] |
 
 ## Environment Setup
@@ -205,6 +205,17 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: Calico CNI, kubectl, netcat, Kubernetes MCP
 > - **MITRE ATT&CK**: T1021 (Lateral Movement), T1046 (Network Service Discovery)
 > - **Writeup**: [writeups/20-network-security-policies.md](writeups/20-network-security-policies.md)
+
+### Scenario 21: Cilium Tetragon - eBPF Security Observability
+> - **Tool Purpose**: Kernel-level runtime security monitoring using eBPF; captures all syscalls (process execution, file access, network connections) making evasion impossible without kernel compromise
+> - **Why eBPF Matters**: Application logs can be deleted/modified; Tetragon hooks directly into the kernel - attackers cannot evade detection because every action requires syscalls
+> - **AI Red Team**: Deployed **PentestGPT** against `health-check-deployment` via SSRF; Tetragon captured entire attack chain including credential hunting (`grep -r 'webhook|vault'`), service account token theft, and K8s API enumeration
+> - **Key Captures**: Every command with full arguments, process lineage (parent-child chains), container security context (privileged: true), pod/namespace/image metadata - complete forensic trail
+> - **Tetragon vs Falco**: Both use eBPF, but Tetragon can **enforce** (block syscalls) not just detect; Tetragon uses Kubernetes CRDs (TracingPolicy) vs Falco's YAML rules
+> - **Real-World Value**: SOC integration via SIEM streaming, compliance logging (PCI-DSS, SOC 2, HIPAA), runtime enforcement in production
+> - **Tools Used**: Cilium Tetragon 1.6.0, Helm, PentestGPT (AI attack agent), jq, Claude Code
+> - **MITRE ATT&CK**: T1552.001 (Credentials in Files), T1078.001 (Valid Accounts), T1059.004 (Unix Shell), T1083 (File Discovery)
+> - **Writeup**: [writeups/21-cilium-tetragon.md](writeups/21-cilium-tetragon.md)
 
 ## Relevant Frameworks
 
