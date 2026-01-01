@@ -12,7 +12,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 |---------|------------|--------|
 | [flaws.cloud](http://flaws.cloud) | AWS Security Misconfigurations | Completed |
 | [flaws2.cloud](http://flaws2.cloud) | AWS Attack & Defense Paths | Completed |
-| **Kubernetes Goat** | Container & K8s Security | In Progress |
+| **Kubernetes Goat** | Container & K8s Security | Completed |
 
 ## Skills Demonstrated
 
@@ -71,7 +71,7 @@ I'm an entry-level DevOps professional building practical security skills throug
 | 19 | Popeye | Cluster sanitization | [x] |
 | 20 | Network Security Policies | Network segmentation | [x] |
 | 21 | Cilium Tetragon | eBPF security observability | [x] |
-| 22 | Kyverno Policy Engine | Policy-as-code | [ ] |
+| 22 | Kyverno Policy Engine | Policy-as-code | [x] |
 
 ## Environment Setup
 
@@ -216,6 +216,17 @@ bash access-kubernetes-goat.sh
 > - **Tools Used**: Cilium Tetragon 1.6.0, Helm, PentestGPT (AI attack agent), jq, Claude Code
 > - **MITRE ATT&CK**: T1552.001 (Credentials in Files), T1078.001 (Valid Accounts), T1059.004 (Unix Shell), T1083 (File Discovery)
 > - **Writeup**: [writeups/21-cilium-tetragon.md](writeups/21-cilium-tetragon.md)
+
+### Scenario 22: Kyverno - Policy Engine
+> - **Tool Purpose**: Kubernetes-native policy engine that validates, mutates, and generates resources at admission time; enforces security guardrails using familiar YAML syntax (no Rego required)
+> - **Challenge Completed**: Created ClusterPolicy to block `kubectl exec` into pods in sensitive `vault` namespace; validated policy enforcement by testing exec attempts before and after policy deployment
+> - **Key Discovery**: Resource syntax matters - `Pod/exec` (subresource) works, `PodExecOptions` silently fails; Kyverno accepts invalid policies without error but doesn't enforce them
+> - **Prevention Mapping**: Kyverno can prevent every attack from previous scenarios - privileged containers (Scenario 4), missing resource limits (Scenario 13), namespace bypass (Scenario 11), RBAC wildcards (Scenario 16)
+> - **Kyverno vs OPA**: Kyverno uses Kubernetes-native YAML (lower learning curve), OPA uses Rego DSL (more powerful logic); Kyverno can generate resources, OPA cannot
+> - **Real-World Value**: Shift-left security - block misconfigurations at deploy time, not after compromise; CI/CD integration with `kyverno apply` for pre-merge validation
+> - **Tools Used**: Kyverno 1.16.1, Helm, kubectl
+> - **MITRE ATT&CK**: T1609 (Container Admin Command), T1610 (Deploy Container), T1611 (Escape to Host)
+> - **Writeup**: [writeups/22-kyverno-policy-engine.md](writeups/22-kyverno-policy-engine.md)
 
 ## Relevant Frameworks
 
